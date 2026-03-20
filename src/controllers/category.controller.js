@@ -38,3 +38,24 @@ const getCategoryById = (req, res) => {
     });
   }
 };
+
+const createCategory = (req, res) => {
+  const { name } = req.body;
+  // Validación simple
+  if (!name) {
+    return res.status(400).json({
+      success: false,
+      message: "El nombre de la categoría es obligatorio",
+      data: [],
+      errors: [],
+    });
+  }
+
+  const newCategory = CategoryModel.create({ name });
+  res.status(201).json({
+    success: true,
+    message: "Categoría creada correctamente",
+    data: newCategory,
+    errors: [],
+  });
+};
