@@ -40,7 +40,7 @@ const getProductById = (req, res) => {
 };
 
 const createProduct = (req, res) => {
-  const { name, price } = req.body;
+  const { name, price, category_id } = req.body;
   // Validación simple
   if (!name || !price) {
     return res.status(400).json({
@@ -51,7 +51,7 @@ const createProduct = (req, res) => {
     });
   }
 
-  const newProduct = ProductModel.create({ name, price });
+  const newProduct = ProductModel.create({ name, price, category_id });
   res.status(201).json({
     success: true,
     message: "Producto creado correctamente",
