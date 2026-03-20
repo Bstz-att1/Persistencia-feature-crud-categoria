@@ -30,4 +30,8 @@ export const ProductModel = {
     productsData.splice(index, 1);
     return true;
   },
+
+    existsByCategoryId: (categoryId) => {
+    return productsData.some((product) => product.category_id === categoryId);
+  },
 };
