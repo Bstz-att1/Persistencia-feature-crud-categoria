@@ -1,7 +1,7 @@
 import { CategoryModel } from "../models/category.model.js";
 import { ProductModel } from "../models/product.model.js";
 
-const getAllCategories = (req, res) => {
+export const getAllCategories = (req, res) => {
   const categories = CategoryModel.findAll();
   res.status(200).json({
     success: true,
@@ -11,7 +11,7 @@ const getAllCategories = (req, res) => {
   });
 };
 
-const getCategoryById = (req, res) => {
+export const getCategoryById = (req, res) => {
   try {
     const { id } = req.params;
     const category = CategoryModel.findById(Number(id));
@@ -40,7 +40,7 @@ const getCategoryById = (req, res) => {
   }
 };
 
-const createCategory = (req, res) => {
+export const createCategory = (req, res) => {
   const { name } = req.body;
   // Validación simple
   if (!name) {
@@ -52,7 +52,7 @@ const createCategory = (req, res) => {
     });
   }
 
-  const newCategory = CategoryModel.create({ name });
+const newCategory = CategoryModel.create({ name });
   res.status(201).json({
     success: true,
     message: "Categoría creada correctamente",
@@ -61,7 +61,7 @@ const createCategory = (req, res) => {
   });
 };
 
-const updateCategory = (req, res) => {
+export const updateCategory = (req, res) => {
   const { id } = req.params;
   const updatedCategory = CategoryModel.update(Number(id), req.body);
   if (!updatedCategory) { 
@@ -80,7 +80,7 @@ const updateCategory = (req, res) => {
   });
 };
 
-const deleteCategory = (req, res) => {
+export const deleteCategory = (req, res) => {
   try {
     const { id } = req.params;
     
@@ -120,4 +120,4 @@ const deleteCategory = (req, res) => {
       errors: [],
     });
   } 
-}
+};
