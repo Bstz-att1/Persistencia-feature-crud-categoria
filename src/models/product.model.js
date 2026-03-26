@@ -17,7 +17,7 @@ export const ProductModel = {
   findByCategoryId: async (categoryId) => {
     // Usamos el nombre exacto de la columna que definiste en tu SQL: 'categori_id'
     const [rows] = await pool.query(
-      "SELECT * FROM products WHERE categori_id = ?",
+      "SELECT * FROM products WHERE category_id = ?",
       [categoryId],
     );
     return rows;
@@ -28,7 +28,7 @@ export const ProductModel = {
     const { name, category_id, price } = newProduct;
 
     const [result] = await pool.query(
-      "INSERT INTO products (name, categori_id, price) VALUES (?, ?, ?)",
+      "INSERT INTO products (name, category_id, price) VALUES (?, ?, ?)",
       [name, category_id, price],
     );
 
@@ -43,7 +43,8 @@ export const ProductModel = {
     const { name, category_id } = updatedFields;
 
     const [result] = await pool.query(
-      "UPDATE products SET name = ?, categori_id = ? price = ? WHERE id = ?",
+      "UPDATE products SET name = ?, category_id = ? price = ? WHERE id = ?"
+,
       [name, category_id, id],
     );
 

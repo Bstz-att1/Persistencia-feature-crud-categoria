@@ -52,20 +52,20 @@ const getProductById = async (req, res) => {
 const createProduct = async (req, res) => {
   try {
     // justado al esquema SQL real: name y categori_id
-    const { name, categori_id, price } = req.body;
+    const { name, category_id, price } = req.body;
 
     // Validación estricta para la base de datos
-    if (!name || !categori_id || !price) {
+    if (!name || !category_id || !price) {
       return res.status(400).json({
         success: false,
         message:
-          "El nombre, precio o el ID de la categoría (categori_id) son obligatorios",
+          "El nombre, precio o el ID de la categoría (category_id) son obligatorios",
         data: [],
         errors: [],
       });
     }
 
-    const newProduct = await ProductModel.create({ name, categori_id });
+    const newProduct = await ProductModel.create({ name, category_id });
     res.status(201).json({
       success: true,
       message: "Producto creado correctamente",
@@ -73,7 +73,7 @@ const createProduct = async (req, res) => {
       errors: [],
     });
   } catch (error) {
-    // Si envían un categori_id que no existe, MySQL lanzará un error de llave foránea
+    // Si envían un category_id que no existe, MySQL lanzará un error de llave foránea
     res.status(500).json({
       success: false,
       message:
